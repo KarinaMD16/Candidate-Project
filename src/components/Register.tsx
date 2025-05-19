@@ -131,7 +131,7 @@ export default function RegisterForm() {
         <div className="button-group">
           <button
             type="button"
-            onClick={() => router.navigate({ to: '/login' })}
+            onClick={() => router.navigate({ to: "/Login" })}
           >
             Iniciar Sesión
           </button>
