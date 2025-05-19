@@ -11,27 +11,34 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as RegisterImport } from './routes/(auth)/Register'
-import { Route as LoginImport } from './routes/(auth)/Login'
+import { Route as PerfilImport } from './routes/Perfil'
 import { Route as IndexImport } from './routes/index'
+import { Route as authRegisterImport } from './routes/(auth)/Register'
+import { Route as authLoginImport } from './routes/(auth)/Login'
 
 // Create/Update Routes
 
-const RegisterRoute = RegisterImport.update({
-  id: '/Register',
-  path: '/Register',
-  getParentRoute: () => rootRoute,
-} as any)
-
-const LoginRoute = LoginImport.update({
-  id: '/Login',
-  path: '/Login',
+const PerfilRoute = PerfilImport.update({
+  id: '/Perfil',
+  path: '/Perfil',
   getParentRoute: () => rootRoute,
 } as any)
 
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const authRegisterRoute = authRegisterImport.update({
+  id: '/(auth)/Register',
+  path: '/Register',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const authLoginRoute = authLoginImport.update({
+  id: '/(auth)/Login',
+  path: '/Login',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -46,18 +53,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/Login': {
-      id: '/Login'
-      path: '/Login'
-      fullPath: '/Login'
-      preLoaderRoute: typeof LoginImport
+    '/Perfil': {
+      id: '/Perfil'
+      path: '/Perfil'
+      fullPath: '/Perfil'
+      preLoaderRoute: typeof PerfilImport
       parentRoute: typeof rootRoute
     }
-    '/Register': {
-      id: '/Register'
+    '/(auth)/Login': {
+      id: '/(auth)/Login'
+      path: '/Login'
+      fullPath: '/Login'
+      preLoaderRoute: typeof authLoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/(auth)/Register': {
+      id: '/(auth)/Register'
       path: '/Register'
       fullPath: '/Register'
-      preLoaderRoute: typeof RegisterImport
+      preLoaderRoute: typeof authRegisterImport
       parentRoute: typeof rootRoute
     }
   }
@@ -67,42 +81,47 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/Login': typeof LoginRoute
-  '/Register': typeof RegisterRoute
+  '/Perfil': typeof PerfilRoute
+  '/Login': typeof authLoginRoute
+  '/Register': typeof authRegisterRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/Login': typeof LoginRoute
-  '/Register': typeof RegisterRoute
+  '/Perfil': typeof PerfilRoute
+  '/Login': typeof authLoginRoute
+  '/Register': typeof authRegisterRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/Login': typeof LoginRoute
-  '/Register': typeof RegisterRoute
+  '/Perfil': typeof PerfilRoute
+  '/(auth)/Login': typeof authLoginRoute
+  '/(auth)/Register': typeof authRegisterRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/Login' | '/Register'
+  fullPaths: '/' | '/Perfil' | '/Login' | '/Register'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/Login' | '/Register'
-  id: '__root__' | '/' | '/Login' | '/Register'
+  to: '/' | '/Perfil' | '/Login' | '/Register'
+  id: '__root__' | '/' | '/Perfil' | '/(auth)/Login' | '/(auth)/Register'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  LoginRoute: typeof LoginRoute
-  RegisterRoute: typeof RegisterRoute
+  PerfilRoute: typeof PerfilRoute
+  authLoginRoute: typeof authLoginRoute
+  authRegisterRoute: typeof authRegisterRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  LoginRoute: LoginRoute,
-  RegisterRoute: RegisterRoute,
+  PerfilRoute: PerfilRoute,
+  authLoginRoute: authLoginRoute,
+  authRegisterRoute: authRegisterRoute,
 }
 
 export const routeTree = rootRoute
@@ -116,18 +135,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/Login",
-        "/Register"
+        "/Perfil",
+        "/(auth)/Login",
+        "/(auth)/Register"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/Login": {
-      "filePath": "Login.tsx"
+    "/Perfil": {
+      "filePath": "Perfil.tsx"
     },
-    "/Register": {
-      "filePath": "Register.tsx"
+    "/(auth)/Login": {
+      "filePath": "(auth)/Login.tsx"
+    },
+    "/(auth)/Register": {
+      "filePath": "(auth)/Register.tsx"
     }
   }
 }

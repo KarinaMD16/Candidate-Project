@@ -1,6 +1,12 @@
-import { Outlet } from '@tanstack/react-router'
+import { createRootRoute, Outlet, redirect } from '@tanstack/react-router';
 
-export const Route = {
-  id: '__root',
-  component: () => <Outlet />,
-}
+export const Route = createRootRoute({
+  component: () => <Outlet/>,
+  beforeLoad: ({ location }) => {
+    if (location.pathname === '/') {
+      throw redirect({
+        to: '/Register',
+      });
+    }
+  },
+});

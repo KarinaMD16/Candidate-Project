@@ -1,7 +1,7 @@
 import { createFileRoute, redirect } from '@tanstack/react-router'
 import {isTokenExpired} from '../utils/token'
 
-export const Route = createFileRoute('/Login')({
+export const Route = createFileRoute('/Perfil')({
     beforeLoad: () => {
         const token = localStorage.getItem('token')
         if (!token || isTokenExpired(token)) {
