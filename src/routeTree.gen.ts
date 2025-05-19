@@ -11,22 +11,22 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as PerfilImport } from './routes/Perfil'
 import { Route as IndexImport } from './routes/index'
+import { Route as dashboardPerfilImport } from './routes/(dashboard)/Perfil'
 import { Route as authRegisterImport } from './routes/(auth)/Register'
 import { Route as authLoginImport } from './routes/(auth)/Login'
 
 // Create/Update Routes
 
-const PerfilRoute = PerfilImport.update({
-  id: '/Perfil',
-  path: '/Perfil',
-  getParentRoute: () => rootRoute,
-} as any)
-
 const IndexRoute = IndexImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const dashboardPerfilRoute = dashboardPerfilImport.update({
+  id: '/(dashboard)/Perfil',
+  path: '/Perfil',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -53,13 +53,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/Perfil': {
-      id: '/Perfil'
-      path: '/Perfil'
-      fullPath: '/Perfil'
-      preLoaderRoute: typeof PerfilImport
-      parentRoute: typeof rootRoute
-    }
     '/(auth)/Login': {
       id: '/(auth)/Login'
       path: '/Login'
@@ -74,6 +67,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authRegisterImport
       parentRoute: typeof rootRoute
     }
+    '/(dashboard)/Perfil': {
+      id: '/(dashboard)/Perfil'
+      path: '/Perfil'
+      fullPath: '/Perfil'
+      preLoaderRoute: typeof dashboardPerfilImport
+      parentRoute: typeof rootRoute
+    }
   }
 }
 
@@ -81,47 +81,52 @@ declare module '@tanstack/react-router' {
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/Perfil': typeof PerfilRoute
   '/Login': typeof authLoginRoute
   '/Register': typeof authRegisterRoute
+  '/Perfil': typeof dashboardPerfilRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/Perfil': typeof PerfilRoute
   '/Login': typeof authLoginRoute
   '/Register': typeof authRegisterRoute
+  '/Perfil': typeof dashboardPerfilRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/Perfil': typeof PerfilRoute
   '/(auth)/Login': typeof authLoginRoute
   '/(auth)/Register': typeof authRegisterRoute
+  '/(dashboard)/Perfil': typeof dashboardPerfilRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/Perfil' | '/Login' | '/Register'
+  fullPaths: '/' | '/Login' | '/Register' | '/Perfil'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/Perfil' | '/Login' | '/Register'
-  id: '__root__' | '/' | '/Perfil' | '/(auth)/Login' | '/(auth)/Register'
+  to: '/' | '/Login' | '/Register' | '/Perfil'
+  id:
+    | '__root__'
+    | '/'
+    | '/(auth)/Login'
+    | '/(auth)/Register'
+    | '/(dashboard)/Perfil'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  PerfilRoute: typeof PerfilRoute
   authLoginRoute: typeof authLoginRoute
   authRegisterRoute: typeof authRegisterRoute
+  dashboardPerfilRoute: typeof dashboardPerfilRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  PerfilRoute: PerfilRoute,
   authLoginRoute: authLoginRoute,
   authRegisterRoute: authRegisterRoute,
+  dashboardPerfilRoute: dashboardPerfilRoute,
 }
 
 export const routeTree = rootRoute
@@ -135,22 +140,22 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/Perfil",
         "/(auth)/Login",
-        "/(auth)/Register"
+        "/(auth)/Register",
+        "/(dashboard)/Perfil"
       ]
     },
     "/": {
       "filePath": "index.tsx"
-    },
-    "/Perfil": {
-      "filePath": "Perfil.tsx"
     },
     "/(auth)/Login": {
       "filePath": "(auth)/Login.tsx"
     },
     "/(auth)/Register": {
       "filePath": "(auth)/Register.tsx"
+    },
+    "/(dashboard)/Perfil": {
+      "filePath": "(dashboard)/Perfil.tsx"
     }
   }
 }
