@@ -9,6 +9,7 @@ export interface User {
     token: string
 }
 
+
 export const UserInitalSate = {
     id: 0,
     nombre: '',
@@ -18,4 +19,15 @@ export const UserInitalSate = {
     habilidades: [],
     role: '',
     token: ''
+}
+
+export type UserFormFields = {
+    nombre: string,
+    apellido: string,
+    correoElectronico: string,
+    password: string
+}
+export type LoginFormFields = {
+    correoElectronico: string,
+    password: string
 }

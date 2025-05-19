@@ -1,0 +1,47 @@
+import {
+  createRootRoute,
+  createRoute,
+  createRouter,
+  Outlet,
+} from '@tanstack/react-router';
+
+import Login from '../pages/Login';
+import Register from '../pages/Register';
+import Perfil from '../pages/Perfil';
+import ProtectedRoute from '../components/ProtectedRoute';
+
+const rootRoute = createRootRoute({ component: Outlet });
+
+const loginRoute = createRoute({
+  path: '/login',
+  getParentRoute: () => rootRoute,
+  component: Login,
+});
+
+const registerRoute = createRoute({
+  path: '/register',
+  getParentRoute: () => rootRoute,
+  component: Register,
+});
+
+const protectedRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  id: 'protected',
+  component: ProtectedRoute,
+});
+
+const perfilRoute = createRoute({
+  path: '/perfil',
+  getParentRoute: () => protectedRoute,
+  component: Perfil,
+});
+
+const routeTree = rootRoute.addChildren([
+  loginRoute,
+  registerRoute,
+  protectedRoute.addChildren([
+    perfilRoute,
+  ]),
+]);
+
+export const router = createRouter({ routeTree });
