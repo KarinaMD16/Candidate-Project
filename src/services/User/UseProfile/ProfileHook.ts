@@ -1,10 +1,10 @@
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { ActHabilidad, getProfile } from "../ProfileService/ProfileService"
 
-const HABILIDADES_DISPONIBLES = ['C#', 'MySQL', 'SQL', 'NEST']
+import { useMutation,  useQuery,  useQueryClient } from "@tanstack/react-query"
+import { ActHabilidad, gethabilidades, getProfile } from "../ProfileService/ProfileService"
+
 
 export function useProfile() {
-  const queryClient = useQueryClient()
+ const queryClient = useQueryClient();
 
   const { data: perfil, isLoading, error } = useQuery({
     queryKey: ['perfil'],
@@ -22,7 +22,15 @@ export function useProfile() {
     perfil,
     loading: isLoading,
     error,
-    habDisponibles: HABILIDADES_DISPONIBLES,
     ActHabilidadUser
   }
+}
+
+export const getHabilidad = () => {
+    const { data, isLoading: isPending, error } = useQuery({
+        queryKey: ['Habilidad'],
+        queryFn: () => gethabilidades(),
+    });
+  
+    return { data, isPending, error };
 }
