@@ -13,7 +13,7 @@ export const useLogin = () => {
     
     onSuccess: (res) => {
       localStorage.setItem('token', String(res.token))
-      navigate({ to: '/perfil' }) 
+      navigate({ to: '/Perfil' }) 
     }
   })
 }
@@ -23,6 +23,12 @@ export const useRegister = () => {
   
   return useMutation({
     mutationFn: createUser,
-    onSuccess: () => navigate({ to: '/login' }) 
+    onSuccess: () => navigate({ to: '/Login' }) 
   })
 }
+
+
+
+
+
+
