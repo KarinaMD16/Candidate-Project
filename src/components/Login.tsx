@@ -1,12 +1,12 @@
 import { useForm } from '@tanstack/react-form';
 import { loginSchema } from '../schema/schemaAuth';
 import { useLogin } from '../services/User/UserHook/UserHook';
-import { useRouter } from '@tanstack/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import type { LoginData } from '../schema/schemaAuth';
 import { useState } from 'react';
 
 export default function LoginForm() {
-  const router = useRouter();
+  const router = useNavigate();
   const mutation = useLogin();
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
@@ -104,7 +104,7 @@ export default function LoginForm() {
         <div className="button-group">
           <button
             type="button"
-            onClick={() => router.navigate({ to: '/Register' })}
+            onClick={() => router({ to: '/Register' })}
           >
             Registrarse
           </button>

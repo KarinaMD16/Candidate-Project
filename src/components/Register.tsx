@@ -1,12 +1,12 @@
 import { useForm } from '@tanstack/react-form';
 import { registerSchema } from '../schema/schemaAuth';
 import { useRegister } from '../services/User/UserHook/UserHook';
-import { useRouter } from '@tanstack/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import type { RegisterFormFields } from '../schema/schemaAuth';
 
 export default function RegisterForm() {
-  const router = useRouter();
+  const router = useNavigate();
   const mutation = useRegister();
   const [formErrors, setFormErrors] = useState<Record<string, string>>({});
 
@@ -131,7 +131,7 @@ export default function RegisterForm() {
         <div className="button-group">
           <button
             type="button"
-            onClick={() => router.navigate({ to: "/Login" })}
+            onClick={() => router({ to: "/Login" })}
           >
             Iniciar Sesión
           </button>
