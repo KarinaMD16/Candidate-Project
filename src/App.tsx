@@ -1,22 +1,23 @@
-import { Routes, Route } from 'react-router-dom'
-import Login from './pages/Login'
-import Register from './pages/Register'
-import PrivateRoute from './components/PrivateRoute'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import {  RouterProvider, createRouter } from '@tanstack/react-router'
+import { routeTree } from './routeTree.gen';
 
+const queryClient = new QueryClient()
+
+const router = createRouter({ routeTree })
+
+declare module "@tanstack/react-router" {
+  interface Register {
+    router: typeof router;
+  }
+}
 
 function App() {
   return (
-    <Routes>
-      {/* Rutas públicas */}
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-
-      {/* Rutas protegidas */}
-      <Route element={<PrivateRoute />}>
-       {/*<Route path="/perfil" element={<Perfil/>} />*/} 
-      </Route>
-    </Routes>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   )
 }
 
-export default App
+export default App;

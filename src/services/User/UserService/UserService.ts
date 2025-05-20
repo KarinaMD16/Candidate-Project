@@ -1,7 +1,7 @@
-import type { User } from '../../../models/User/User'
+import type { User, UserFormFields } from '../../../models/User/User'
 import axiosPrivate from '../../../api/apiAuth'
 
-export async function createUser(user: User): Promise<User>{
+export async function createUser(user: UserFormFields): Promise<UserFormFields>{
     const response = await axiosPrivate.post(`/Candidate`, user);
     return response.data;
 }
