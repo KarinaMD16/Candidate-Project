@@ -13,7 +13,7 @@ export const ActHabilidad = async (habilidad: string): Promise<Habilidad> => {
   return res.data
 }
 
-export const gethabilidades = async (): Promise<Habilidad> => {
+export const gethabilidades = async () => {
   const res = await axiosPrivate.get('/Habilidad')
   return res.data
 }

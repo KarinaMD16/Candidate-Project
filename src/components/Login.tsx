@@ -44,23 +44,7 @@ export default function LoginForm() {
         });
       }
 
-        
-
-
-
-
-
-
     },
-
-
-      
-
-
-
-
-
-
 
   });
 

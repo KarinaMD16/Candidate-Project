@@ -26,7 +26,7 @@ export function useProfile() {
   }
 }
 
-export const getHabilidad = () => {
+export const useGetHabilidades = () => {
     const { data, isLoading: isPending, error } = useQuery({
         queryKey: ['Habilidad'],
         queryFn: () => gethabilidades(),

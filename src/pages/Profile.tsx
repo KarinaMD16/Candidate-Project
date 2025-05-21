@@ -1,4 +1,5 @@
 //import HabilidadButton from "../components/ButtonHabilidad"
+import type { Habilidad } from "../models/User/Habilidad"
 import { useGetHabilidades, useProfile } from "../services/User/UseProfile/ProfileHook"
 
  function Profile(){
@@ -37,7 +38,7 @@ return (
          </div>
 
         <div className="Habilidades">
-           {habilidades?.map((habilidad: {id:any, Nombre:any, ofertaHabilidad:any}) => (
+           {habilidades?.map((habilidad:Habilidad) => (
           <span key={habilidad.id}>{habilidad.Nombre}</span>
         ))}
          </div>
