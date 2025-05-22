@@ -1,12 +1,11 @@
-import { createFileRoute, redirect } from '@tanstack/react-router'
-import {isTokenExpired} from '../../utils/token'
+import { createFileRoute, redirect,  useNavigate } from '@tanstack/react-router'
+import { isAuthenticated, signOut } from '../../utils/auth'
 import Profile from '../../pages/Profile'
 
 
 export const Route = createFileRoute('/(dashboard)/Perfil')({
     beforeLoad: () => {
-        const token = localStorage.getItem('token')
-        if (!token || isTokenExpired(token)) {
+        if (!isAuthenticated()) {
             throw redirect({
                 to: '/Login',
             })
@@ -16,12 +15,5 @@ export const Route = createFileRoute('/(dashboard)/Perfil')({
 })
 
 function PerfilComponent() {
-  return (
-    <div>
-      <Profile />
-      
-    </div>
-  );
+  return <div>Perfil</div>
 }
-
-

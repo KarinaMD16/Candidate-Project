@@ -13,6 +13,7 @@
     "@hookform/resolvers": "^5.0.1",
     "@tanstack/react-form": "^1.11.2",
     "@tanstack/react-query": "^5.76.1",
+    "@tanstack/react-query-devtools": "^5.76.1",
     "@tanstack/react-router": "^1.120.5",
     "@tanstack/react-router-devtools": "^1.120.6",
     "@tanstack/zod-form-adapter": "^0.42.1",
