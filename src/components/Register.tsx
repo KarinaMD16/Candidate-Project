@@ -1,9 +1,10 @@
 import { useForm } from '@tanstack/react-form';
 import { registerSchema } from '../schema/schemaAuth';
-import { useRegister } from '../services/User/UserHook/UserHook';
+import { useRegister } from '../services/User/UserHook';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import type { RegisterFormFields } from '../schema/schemaAuth';
+import { getUserByemail } from '../services/User/UserService';
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -22,17 +23,30 @@ export default function RegisterForm() {
       setFormErrors({});
       const validation = registerSchema.safeParse(value);
 
+      // Validación del formulario
       if (!validation.success) {
+        // Si la validación falla, muestra los errores
         const fieldErrors: Record<string, string> = {};
+        // Recorre los errores 
         validation.error.errors.forEach((err) => {
+          // Asigna el mensaje de error al campo correspondiente
           const field = err.path[0] as string;
           fieldErrors[field] = err.message;
         });
+        // Actualiza el estado de los errores del formulario
         setFormErrors(fieldErrors);
         return;
       }
 
       try {
+          // Primero verificar si el usuario existe
+          const userExists = await getUserByemail(value.correoElectronico)
+    
+            if (userExists) {
+          // Usuario ya existe pues muestra el error
+          setFormErrors({ correoElectronico: 'El correo electrónico ya está registrado.' });
+          return;}
+
         await mutation.mutateAsync(value);
       } catch (err) {
         console.error('Error durante el registro:', err);
