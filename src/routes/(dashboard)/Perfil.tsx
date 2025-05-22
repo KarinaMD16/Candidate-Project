@@ -2,6 +2,7 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 import {isTokenExpired} from '../../utils/token'
 import Profile from '../../pages/Profile'
 
+
 export const Route = createFileRoute('/(dashboard)/Perfil')({
     beforeLoad: () => {
         const token = localStorage.getItem('token')
@@ -15,7 +16,12 @@ export const Route = createFileRoute('/(dashboard)/Perfil')({
 })
 
 function PerfilComponent() {
-  return <Profile>
-    
-  </Profile>
+  return (
+    <div>
+      <Profile />
+      
+    </div>
+  );
 }
+
+

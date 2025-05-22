@@ -1,3 +1,4 @@
+//import axios from "axios"
 import axiosPrivate from "../../../api/apiAuth"
 import type { Habilidad } from "../../../models/User/Habilidad"
 
@@ -13,9 +14,22 @@ export const ActHabilidad = async (habilidad: string): Promise<Habilidad> => {
   return res.data
 }
 
+
+
+
+
+/*export const gethabilidades = async (): Promise<Habilidad[]> => {
+  const response = await axios.get("https://localhost:7113/api/habilidad");
+  return response.data;
+};
+
+/*
 export const gethabilidades = async () => {
   const res = await axiosPrivate.get('/Habilidad')
   return res.data
-}
+}*/
 
-
+export const gethabilidades = async (): Promise<Habilidad[]> => {
+  const response = await axiosPrivate.get<Habilidad[]>("/habilidad");
+  return response.data;
+};

@@ -2,7 +2,7 @@
 export interface Habilidad{
     id:string,
     Nombre:string,
-    ofertaHbilidad:[]
+    ofertaHabilidad:[]
 }
 
 
@@ -14,9 +14,10 @@ export const HabilidadInitalSate = {
    
 }
 
+
 export type HabilidadType = {
     id:string,
     Nombre:string,
-    ofertaHbilidad:[]
+    ofertaHabilidad:[]
 
 }

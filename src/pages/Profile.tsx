@@ -1,25 +1,23 @@
-//import HabilidadButton from "../components/ButtonHabilidad"
-import type { Habilidad } from "../models/User/Habilidad"
-import { useGetHabilidades, useProfile } from "../services/User/UseProfile/ProfileHook"
+//import { useHabilidades, type Habilidad } from "../services/User/HabilidadService/HabilidadHook";
+import { useHabilidades, type Habilidad } from "../services/User/HabilidadService/HabilidadHook";
+import { useProfile } from "../services/User/UseProfile/ProfileHook";
 
  function Profile(){
+ const {
+    perfil,
+    loading: loadingPerfil,
+    error: errorPerfil,
+  } = useProfile();
 
-    const{
-        perfil,
-        loading,
-        error,
-  
-    }= useProfile()
+  const {
+    habilidades,
+    loading,
+    error,
+  } = useHabilidades();
 
-const {data:habilidades}= useGetHabilidades() 
+  if (loading || loadingPerfil) return <p>Cargando perfil...</p>;
+  if (error || errorPerfil) return <p>Error al cargar perfil o habilidades</p>;
 
-
-
-if (loading) return <p>Cargando perfil</p>
-
-if(error){
-    return <p>error al cargar perfil</p>
-}
 
 return (
 
@@ -32,15 +30,12 @@ return (
 
          <h2>Habilidades</h2>
          <div className="habilidades-container">
-            {perfil.habilidades}
-
-         </div>
-         </div>
-
-        <div className="Habilidades">
-           {habilidades?.map((habilidad:Habilidad) => (
-          <span key={habilidad.id}>{habilidad.Nombre}</span>
-        ))}
+          {habilidades?.map((habilidad: Habilidad) => (
+            <span key={habilidad.id} className="habilidad-disponible">
+              {habilidad.nombre}
+            </span>
+          ))}
+        </div>
          </div>
 
     </div>

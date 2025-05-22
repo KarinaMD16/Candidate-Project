@@ -8,7 +8,8 @@ export default function HabilidadButton({ onClick, selected, children }: Habilid
   return (
     <button
       onClick={onClick}
-      className={`${HabilidadButton} ${selected ?selected : ''}`}
+      className={selected ? 'selected' : ''}
+      //className={`${HabilidadButton} ${selected ?selected : ''}`}
     >
       {children}
     </button>
