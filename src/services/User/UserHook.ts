@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query'
-import { loginUser, createUser, getUserByemail } from './UserService'
+import { loginUser, createUser } from './UserService'
 import { useNavigate } from '@tanstack/react-router'
 import { signIn } from '../../utils/auth'
 
@@ -13,7 +13,7 @@ export const useLogin = () => {
     }) => loginUser(correoElectronico, password), 
     
     onSuccess: (res) => {
-      localStorage.setItem('token', String(res.token))
+      signIn(res.token)
       navigate({ to: '/Perfil' }) 
     }
   })
@@ -26,12 +26,12 @@ export const useRegister = () => {
     mutationFn: createUser,
     onSuccess: async (res) => {
       try {
-        localStorage.setItem('token', String(res.token))
-        signIn(res.token)
+        const loginResponse = await loginUser(res.correoElectronico, res.password)
+        signIn(loginResponse.token)
         navigate({ to: '/Perfil' })
       } catch (error) {
-        console.error('Error al completar el registro:', error)
-        return ("Error al completar el registro")
+        console.error('Error al iniciar sesión después del registro:', error)
+        return "Error al completar el proceso de registro e inicio de sesión"
       }
     }
   })
