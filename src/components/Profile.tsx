@@ -1,6 +1,7 @@
-//import { useHabilidades, type Habilidad } from "../services/User/HabilidadService/HabilidadHook";
+import { useNavigate } from "@tanstack/react-router";
 import { useHabilidades, type Habilidad } from "../services/User/HabilidadService/HabilidadHook";
 import { useProfile } from "../services/User/UseProfile/ProfileHook";
+import { signOut } from "../utils/auth";
 
  function Profile(){
  const {
@@ -14,6 +15,12 @@ import { useProfile } from "../services/User/UseProfile/ProfileHook";
     loading,
     error,
   } = useHabilidades();
+
+  const navigate = useNavigate()
+  const handlersigOut = () => {
+    signOut()
+     navigate({ to: '/Login' })
+}
 
   if (loading || loadingPerfil) return <p>Cargando perfil...</p>;
   if (error || errorPerfil) return <p>Error al cargar perfil o habilidades</p>;
@@ -37,10 +44,8 @@ return (
           ))}
         </div>
          </div>
-
+         <button type="button" onClick={handlersigOut}>Cerrar Sesion</button>
     </div>
-
-    
 )
 
  }

@@ -1,26 +1,6 @@
-// src/hooks/useHabilidades.ts
-//import { useState, useEffect } from "react";
-//import { useQuery } from "@tanstack/react-query";
-//import type { Habilidad } from "../../../models/User/Habilidad";
-//import { gethabilidades } from "../ProfileService/ProfileService";
+
 import { useEffect, useState } from "react";
 import axiosPrivate from "../../../api/apiAuth";
-/*
-export function useHabilidades() {
-  const { data: habilidades, isLoading: loading, error } = useQuery<Habilidad[]>({
-    queryKey: ['habilidades'],
-    queryFn: gethabilidades,
-  });
-
-  return { habilidades, loading, error };
-}
-*/
-
-
-
-
-
-
 export interface Habilidad {
   id: number;
   nombre: string;
