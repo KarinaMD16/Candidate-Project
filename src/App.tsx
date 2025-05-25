@@ -1,15 +1,3 @@
-
-
-import './App.css'
-
-function App() {
-
-  return (
-    <>
-
-
-    </>
-
 import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {  RouterProvider, createRouter } from '@tanstack/react-router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
@@ -31,7 +19,7 @@ function App() {
       <RouterProvider router={router} />
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
->>>>>>>>> Temporary merge branch 2
+
   )
 }
 
