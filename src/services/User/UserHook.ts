@@ -36,9 +36,3 @@ export const useRegister = () => {
     }
   })
 }
-
-
-
-
-
-

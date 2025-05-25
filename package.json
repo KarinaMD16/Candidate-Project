@@ -15,6 +15,7 @@
     "@tanstack/react-query": "^5.76.1",
     "@tanstack/react-query-devtools": "^5.76.1",
     "@tanstack/react-router": "^1.120.5",
+    "@tanstack/react-router-devtools": "^1.120.6",
     "@tanstack/zod-form-adapter": "^0.42.1",
     "axios": "^1.9.0",
     "proyecto-candidato": "file:",
