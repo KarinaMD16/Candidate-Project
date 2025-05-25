@@ -28,12 +28,12 @@ import { signOut } from "../utils/auth";
 
 return (
 
-    <div className="container">
+    <div >
        
          <div className="Perfil">
             <h1> Mi Perfil</h1>
-         <p><strong>Nombre:</strong> {perfil.nombre} {perfil.apellido}</p>
-      <p><strong>Correo:</strong> {perfil.correoElectronico}</p>
+          <p><strong>Nombre:</strong> {perfil.nombre} {perfil.apellido}</p>
+          <p><strong>Correo:</strong> {perfil.correoElectronico}</p>
 
          <h2>Habilidades</h2>
          <div className="habilidades-container">

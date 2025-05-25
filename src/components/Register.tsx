@@ -60,7 +60,7 @@ export default function RegisterForm() {
   });
 
   return (
-    <section className="register">
+    <div className="form-section glassmorphism">
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -68,8 +68,8 @@ export default function RegisterForm() {
         }}
         className="form-container"
       >
-        <div>
-          <h2>ÚNETE</h2>
+        <div className='Regard'>
+          <h1>Únete</h1>
         </div>
 
         <form.Field name="nombre">
@@ -143,17 +143,17 @@ export default function RegisterForm() {
         {formErrors.general && <p className="error">{formErrors.general}</p>}
 
         <div className="button-group">
-          <button
+          <button className="unselected"
             type="button"
             onClick={() => navigate({ to: "/Login" })}
           >
             Iniciar Sesión
           </button>
-          <button type="submit" disabled={mutation.isPending}>
+          <button className='selected' type="submit" disabled={mutation.isPending}>
             {mutation.isPending ? "Cargando..." : "Registrarse"}
           </button>
         </div>
       </form>
-    </section>
+    </div>
   );
 }

@@ -49,16 +49,16 @@ export default function LoginForm() {
   });
 
   return (
-    <section className="login">
+    <div className="form-section glassmorphism">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           form.handleSubmit();
         }}
-        className="form-container"
+        className='form-container'
       >
-        <div>
-          <h1 className="Regard">INICIA SESIÓN</h1>
+        <div className='Regard'>
+          <h1>Inicia Sesión</h1>
         </div>
 
         <form.Field name="correoElectronico">
@@ -104,17 +104,17 @@ export default function LoginForm() {
         {formErrors.general && <p className="error">{formErrors.general}</p>}
 
         <div className="button-group">
-          <button
+          <button className='unselected'
             type="button"
             onClick={() => navigate({ to: '/Register' })}
           >
             Registrarse
           </button>
-          <button type="submit" disabled={mutation.isPending}>
+          <button className='selected' type="submit" disabled={mutation.isPending}>
             {mutation.isPending ? "Cargando..." : "Iniciar Sesión"}
           </button>
         </div>
       </form>
-    </section>
+    </div>
   );
 }
