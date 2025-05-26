@@ -6,8 +6,8 @@ export function isAuthenticated() {
   if (!token) return false;
 
   try {
-  const { exp } = jwtDecode<{ exp: number }>(token)
-  return exp < Date.now() / 1000
+    const { exp } = jwtDecode<{ exp: number }>(token)
+    return exp > Date.now() / 1000  
   } catch (err) {
     return false;
   }
