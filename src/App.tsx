@@ -3,6 +3,7 @@ import {  RouterProvider, createRouter } from '@tanstack/react-router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { routeTree } from './routeTree.gen';
 import './App.css'
+import { AplicacionesProvider } from './context/aplicacionesContextProvider';
 
 const queryClient = new QueryClient()
 
@@ -17,7 +18,9 @@ declare module "@tanstack/react-router" {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <AplicacionesProvider>
+        <RouterProvider router={router} />
+      </AplicacionesProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
 

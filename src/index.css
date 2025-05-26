@@ -246,6 +246,7 @@ nav{
   margin-top: 6vh;
   display: flex;
   justify-content: end;
+  gap: 2vw;
 }
 
 .ability{
