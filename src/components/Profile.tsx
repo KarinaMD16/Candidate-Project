@@ -1,56 +1,62 @@
-import { useNavigate } from "@tanstack/react-router";
-import { useHabilidades, type Habilidad } from "../services/User/HabilidadService/HabilidadHook";
-import { useProfile } from "../services/User/UseProfile/ProfileHook";
-import { signOut } from "../utils/auth";
+import { useGetProfile } from "../hooks/perfil/ProfileHook";
+import { useGetHabilidades, usePostHabilidadesCandidato } from "../hooks/habilidades/HabilidadHook";
+import type { Habilidad } from "../models/Habilidad";
+import Header from "./Header";
 
  function Profile(){
  const {
     perfil,
     loading: loadingPerfil,
     error: errorPerfil,
-  } = useProfile();
+  } = useGetProfile();
 
-  const {
-    habilidades,
-    loading,
-    error,
-  } = useHabilidades();
+   const {
+    Habilidades,
+    loadingHabilidades,
+    errorHabilidades,
+  } = useGetHabilidades();
 
-  const navigate = useNavigate()
-  const handlersigOut = () => {
-    signOut()
-     navigate({ to: '/Login' })
-}
+  
+const habilidadesCandidato = usePostHabilidadesCandidato();
 
-  if (loading || loadingPerfil) return <p>Cargando perfil...</p>;
-  if (error || errorPerfil) return <p>Error al cargar perfil o habilidades</p>;
+  const handleToggle = (habilidad: Habilidad) => {
+   habilidadesCandidato.mutate({
+      idCandidato: perfil.id,
+      idHabilidad: habilidad.id,
+    });
+  }
+
+  if (loadingHabilidades || loadingPerfil) return <p>Cargando perfil...</p>;
+  if (errorPerfil || errorHabilidades) return <p>Error al cargar perfil o habilidades</p>;
 
 
 return (
+    <>
+        <Header />
 
-    <div >
-       
-         <div className="Perfil">
+        <div className="perfil-container">
+          <div className="perfil">
             <h1> Mi Perfil</h1>
-          <p><strong>Nombre:</strong> {perfil.nombre} {perfil.apellido}</p>
-          <p><strong>Correo:</strong> {perfil.correoElectronico}</p>
+            <p><strong>Nombre: </strong> {perfil.nombre} {perfil.apellido}</p>
+            <p><strong>Correo: </strong> {perfil.correoElectronico}</p>
+          </div>
 
-         <h2>Habilidades</h2>
-         <div className="habilidades-container">
-          {habilidades?.map((habilidad: Habilidad) => (
-            <span key={habilidad.id} className="habilidad-disponible">
-              {habilidad.nombre}
-            </span>
-          ))}
+          <div className="habilidades">
+            <h2>Mis Habilidades</h2>
+
+            <div className="habilidades-container">
+              {Habilidades?.map((habilidad: Habilidad) => (
+                <button onClick={() => {handleToggle(habilidad)}} key={habilidad.id} className="unselected-hab">
+                  {habilidad.name}
+                </button>
+                ))}
+              </div>
+          </div>
+
         </div>
-         </div>
-         <button type="button" onClick={handlersigOut}>Cerrar Sesion</button>
-    </div>
-)
+    </>
+  )
 
- }
-   
-export default Profile; 
+}
 
-
-
+export default Profile;

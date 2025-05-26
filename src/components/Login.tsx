@@ -1,9 +1,10 @@
 import { useForm } from '@tanstack/react-form';
 import { loginSchema } from '../schema/schemaAuth';
-import { useLogin } from '../services/User/UserHook';
 import { useNavigate } from '@tanstack/react-router';
 import type { LoginData } from '../schema/schemaAuth';
 import { useState } from 'react';
+import TypingText from './TypingText';
+import { useLogin } from '../hooks/user/UserHook';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -49,16 +50,16 @@ export default function LoginForm() {
   });
 
   return (
-    <div className="form-section glassmorphism">
+    <div className="form-section ">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           form.handleSubmit();
         }}
-        className='form-container'
+        className='form-container glassmorphism'
       >
         <div className='Regard'>
-          <h1>Inicia Sesión</h1>
+          <TypingText words={["Bienvenido", "Inicia sesión"]} />
         </div>
 
         <form.Field name="correoElectronico">

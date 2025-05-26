@@ -15,6 +15,7 @@
     "@tanstack/react-query-devtools": "^5.77.0",
     "@tanstack/react-router": "^1.120.10",
     "axios": "^1.9.0",
+    "framer-motion": "^12.12.2",
     "jwt-decode": "^4.0.0",
     "proyecto-candidato": "file:",
     "react": "^19.1.0",

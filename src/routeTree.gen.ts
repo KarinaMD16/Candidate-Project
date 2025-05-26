@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as IndexImport } from './routes/index'
 import { Route as dashboardPerfilImport } from './routes/(dashboard)/Perfil'
+import { Route as dashboardOfertasImport } from './routes/(dashboard)/Ofertas'
 import { Route as authRegisterImport } from './routes/(auth)/Register'
 import { Route as authLoginImport } from './routes/(auth)/Login'
 
@@ -27,6 +28,12 @@ const IndexRoute = IndexImport.update({
 const dashboardPerfilRoute = dashboardPerfilImport.update({
   id: '/(dashboard)/Perfil',
   path: '/Perfil',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const dashboardOfertasRoute = dashboardOfertasImport.update({
+  id: '/(dashboard)/Ofertas',
+  path: '/Ofertas',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -67,6 +74,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof authRegisterImport
       parentRoute: typeof rootRoute
     }
+    '/(dashboard)/Ofertas': {
+      id: '/(dashboard)/Ofertas'
+      path: '/Ofertas'
+      fullPath: '/Ofertas'
+      preLoaderRoute: typeof dashboardOfertasImport
+      parentRoute: typeof rootRoute
+    }
     '/(dashboard)/Perfil': {
       id: '/(dashboard)/Perfil'
       path: '/Perfil'
@@ -83,6 +97,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/Login': typeof authLoginRoute
   '/Register': typeof authRegisterRoute
+  '/Ofertas': typeof dashboardOfertasRoute
   '/Perfil': typeof dashboardPerfilRoute
 }
 
@@ -90,6 +105,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/Login': typeof authLoginRoute
   '/Register': typeof authRegisterRoute
+  '/Ofertas': typeof dashboardOfertasRoute
   '/Perfil': typeof dashboardPerfilRoute
 }
 
@@ -98,19 +114,21 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/(auth)/Login': typeof authLoginRoute
   '/(auth)/Register': typeof authRegisterRoute
+  '/(dashboard)/Ofertas': typeof dashboardOfertasRoute
   '/(dashboard)/Perfil': typeof dashboardPerfilRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/Login' | '/Register' | '/Perfil'
+  fullPaths: '/' | '/Login' | '/Register' | '/Ofertas' | '/Perfil'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/Login' | '/Register' | '/Perfil'
+  to: '/' | '/Login' | '/Register' | '/Ofertas' | '/Perfil'
   id:
     | '__root__'
     | '/'
     | '/(auth)/Login'
     | '/(auth)/Register'
+    | '/(dashboard)/Ofertas'
     | '/(dashboard)/Perfil'
   fileRoutesById: FileRoutesById
 }
@@ -119,6 +137,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   authLoginRoute: typeof authLoginRoute
   authRegisterRoute: typeof authRegisterRoute
+  dashboardOfertasRoute: typeof dashboardOfertasRoute
   dashboardPerfilRoute: typeof dashboardPerfilRoute
 }
 
@@ -126,6 +145,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   authLoginRoute: authLoginRoute,
   authRegisterRoute: authRegisterRoute,
+  dashboardOfertasRoute: dashboardOfertasRoute,
   dashboardPerfilRoute: dashboardPerfilRoute,
 }
 
@@ -142,6 +162,7 @@ export const routeTree = rootRoute
         "/",
         "/(auth)/Login",
         "/(auth)/Register",
+        "/(dashboard)/Ofertas",
         "/(dashboard)/Perfil"
       ]
     },
@@ -153,6 +174,9 @@ export const routeTree = rootRoute
     },
     "/(auth)/Register": {
       "filePath": "(auth)/Register.tsx"
+    },
+    "/(dashboard)/Ofertas": {
+      "filePath": "(dashboard)/Ofertas.tsx"
     },
     "/(dashboard)/Perfil": {
       "filePath": "(dashboard)/Perfil.tsx"

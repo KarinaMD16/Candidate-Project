@@ -13,24 +13,17 @@
 
   font-family: Arial, Helvetica, sans-serif;
 
-  position: absolute;
-  inset: 0;
-  z-index: -10;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
+  min-height: 100vh;
   background: radial-gradient(125% 125% at 50% 10%, #000 40%, #63e 100%);
-
+  background-attachment: fixed;
   --form-bg-color: #1a1a1d;
   --input-bg-color: transparent;
   --input-border-color: #ffffff80;
   --border-radius: 8px;
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
+
+
 
 .glassmorphism{
   border-radius: 25px;
@@ -39,16 +32,6 @@
   backdrop-filter: blur(5.699999809265137px);
 }
 
-.form-section {
-  display: flex;
-  padding: 3vw;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 45px;
-  flex-shrink: 0;
-
-}
 
 input{
   border-radius: 10px;
@@ -82,7 +65,11 @@ button {
 }
 
 .unselected{
+  border-radius: 25px;
+  border: 1px solid #8DA0EA;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   background: none;
+  padding: 3px 11px;
 }
 
 .selected {
@@ -96,8 +83,9 @@ button {
   color: #8DA0EA;
   text-align: center;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  font-size: x-large;
-
+  font-size: xx-large;
+  font-weight: bold;
+  margin-bottom: 3vh;
 }
 
 .button-group{
@@ -108,11 +96,29 @@ button {
   align-items: center;
 }
 
+.form-section {
+  position: fixed; /* Esto es clave */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 10; /* Asegúrate de que esté por encima si hay fondo */
+}
+
 .form-container{
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: auto;
+  width: 25vw;
   justify-content: center;
+  align-items: center;
+  padding: 15px;
 }
 
 .error{
@@ -120,4 +126,128 @@ button {
   font-size: small;
   padding: 0;
   margin: 0;
+}
+
+.container{
+  border-radius: 25px;
+  border: 1px solid #8DA0EA;
+  display: flex;
+  padding: 25px 0px 0px 35px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.unselected-hab{
+  background: none;
+  border-radius: 25px;
+  border: 1px solid #8DA0EA;
+  padding: 10px 20px;
+}
+
+.habilidades-container{
+  width: 30vw;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.perfil-container{
+  display: flex;
+  gap: 30vw;
+  justify-content: center;
+  align-items: center;
+  height:85vh;
+}
+
+.logout {
+  top: 0;
+}
+
+.page{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 10px 20px;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+header{
+  top: 1rem;
+  position: sticky;
+  z-index: 1000;
+  
+}
+
+nav{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.offerCard h4, h3{
+  margin: 0;
+}
+
+.offerCard{
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+}
+
+.offer-apply{
+  margin: 2vh 2vh 0;
+  color: #8DA0EA;
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.offerCard-data{
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  gap: 10px;
+  width: 40vw;
+  padding: 20px;
+}
+
+.offer-container{
+  margin-top: 5vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3.5vh;
+}
+
+.offer-abilities{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.opciones{
+  margin-top: 6vh;
+  display: flex;
+  justify-content: end;
+}
+
+.ability{
+  
 }

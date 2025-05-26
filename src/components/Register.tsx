@@ -1,10 +1,11 @@
 import { useForm } from '@tanstack/react-form';
 import { registerSchema } from '../schema/schemaAuth';
-import { useRegister } from '../services/User/UserHook';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import type { RegisterFormFields } from '../schema/schemaAuth';
-import { getUserByemail } from '../services/User/UserService';
+import { getUserByemail } from '../services/user/UserService';
+import TypingText from './TypingText';
+import { useRegister } from '../hooks/user/UserHook';
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -60,16 +61,16 @@ export default function RegisterForm() {
   });
 
   return (
-    <div className="form-section glassmorphism">
+    <div className="form-section ">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           form.handleSubmit();
         }}
-        className="form-container"
+        className="form-container glassmorphism"
       >
         <div className='Regard'>
-          <h1>Únete</h1>
+          <TypingText words={["Bienvenido", "Únete"]} />
         </div>
 
         <form.Field name="nombre">

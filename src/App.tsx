@@ -2,6 +2,7 @@ import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {  RouterProvider, createRouter } from '@tanstack/react-router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { routeTree } from './routeTree.gen';
+import './App.css'
 
 const queryClient = new QueryClient()
 
