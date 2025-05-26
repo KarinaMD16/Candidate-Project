@@ -42,17 +42,15 @@ export default function RegisterForm() {
           // Primero verificar si el usuario existe
           const userExists = await getUserByemail(value.correoElectronico)
     
-            if (userExists) {
-          // Usuario ya existe pues muestra el error
+          if (userExists) {
           setFormErrors({ correoElectronico: 'El correo electrónico ya está registrado.' });
           return;}
-
-        await mutation.mutateAsync(value);
-      } catch (err) {
-        console.error('Error durante el registro:', err);
-        if (err instanceof Error) {
+          await mutation.mutateAsync(value)
+        }
+        catch (err) {
+          if (err instanceof Error) {
           setFormErrors({ general: `Error al registrarse: ${err.message}` });
-        } else {
+         } else {
           setFormErrors({ general: 'Error al registrarse. Inténtelo nuevamente.' });
         }
       }

@@ -30,8 +30,7 @@ export const useRegister = () => {
         signIn(loginResponse.token)
         navigate({ to: '/Perfil' })
       } catch (error) {
-        console.error('Error al iniciar sesión después del registro:', error)
-        return "Error al completar el proceso de registro e inicio de sesión"
+        return "Error al iniciar sesión después del registro"
       }
     }
   })

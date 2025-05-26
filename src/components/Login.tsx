@@ -38,7 +38,6 @@ export default function LoginForm() {
           password: value.password,
         });
       } catch (err: unknown) {
-        console.error('Error de inicio de sesión:', err);
         setFormErrors({
           general: 'Credenciales incorrectas o error en el servidor',
         });
