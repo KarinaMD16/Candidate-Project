@@ -1,7 +1,12 @@
-import { useState } from "react";
+import { useState, type JSX } from "react";
 import AplicacionesContext from "./aplicacionesContext";
 
-export const AplicacionesProvider = ({ children }: { children: React.ReactNode }) => {
+type AplicacionesContextTypes = {
+children: JSX.Element;
+}
+
+
+export const AplicacionesProvider = ({ children }: AplicacionesContextTypes ) => {
   const [aplicaciones, setAplicaciones] = useState<number[]>([]);
 
   const agregarAplicacion = (id: number) => {

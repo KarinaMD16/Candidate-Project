@@ -3,10 +3,11 @@ import ButtonAplicar from "./ButtonAplicar"
 
 type offerProps = {
     offer: Oferta
-    
 }
 
 const OfferCard = ({offer}:offerProps) => {
+    
+
   return (
     <div className="page offerCard glassmorphism" key={offer.id}>
 
@@ -23,7 +24,7 @@ const OfferCard = ({offer}:offerProps) => {
             <div className="offer-abilities">
                 <h4>Habilidades: </h4>
                     {offer.habilidades.map((habilidad) => (
-                    <div key={habilidad.id} className="unselected ability">{habilidad.name}</div>
+                    <div key={habilidad.id} className={habilidad.haceMatch ? "selected" : "unselected"}>{habilidad.name}</div>
                     ))}
             </div>
         </div>

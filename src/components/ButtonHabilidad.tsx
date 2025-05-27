@@ -1,11 +1,11 @@
 import { useToggleHabilidad } from "../context/habilidades/useToggleHabilidades";
 
-type ofertadId = {
+type buttonHabilidadProps = {
   idHabilidad: number;
   children?: React.ReactNode;
 }
 
-const ButtonHabilidad = ({ idHabilidad, children }: ofertadId) => {
+const ButtonHabilidad = ({ idHabilidad, children }: buttonHabilidadProps) => {
   const { toggleHabilidad, habilidades } = useToggleHabilidad();
   const isSelected = habilidades.includes(idHabilidad);
 
@@ -16,5 +16,6 @@ const ButtonHabilidad = ({ idHabilidad, children }: ofertadId) => {
     </button>
   )
 }
+
 export default ButtonHabilidad;
     // This button is used to toggle a skill

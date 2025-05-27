@@ -6,6 +6,7 @@ export interface Oferta {
     empresaNombre:string
     habilidades: {
         id: number,
-        name: string
+        name: string, 
+        haceMatch: boolean
     }[];
 } 
