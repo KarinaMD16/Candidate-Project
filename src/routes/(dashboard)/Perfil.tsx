@@ -1,5 +1,8 @@
-import { createFileRoute, redirect,  useNavigate } from '@tanstack/react-router'
-import { isAuthenticated, signOut } from '../../utils/auth'
+import { createFileRoute, redirect } from '@tanstack/react-router'
+import { isAuthenticated } from '../../utils/auth'
+import Profile from '../../components/Profile'
+
+
 
 export const Route = createFileRoute('/(dashboard)/Perfil')({
     beforeLoad: () => {
@@ -13,17 +16,6 @@ export const Route = createFileRoute('/(dashboard)/Perfil')({
 })
 
 function PerfilComponent() {
+  return <Profile/>
 
-  const navigate = useNavigate()
-  const handlersigOut = () => {
-    signOut()
-     navigate({ to: '/Login' })
-}
-
-   return( 
-   <div>
-      Perfil
-      <button type="button" onClick={handlersigOut}>Log out</button> 
-   </div>
-   )
 }

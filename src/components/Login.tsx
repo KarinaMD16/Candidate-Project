@@ -1,9 +1,10 @@
 import { useForm } from '@tanstack/react-form';
 import { loginSchema } from '../schema/schemaAuth';
-import { useLogin } from '../services/User/UserHook';
 import { useNavigate } from '@tanstack/react-router';
 import type { LoginData } from '../schema/schemaAuth';
 import { useState } from 'react';
+import TypingText from './TypingText';
+import { useLogin } from '../hooks/user/UserHook';
 
 export default function LoginForm() {
   const navigate = useNavigate();
@@ -42,20 +43,22 @@ export default function LoginForm() {
           general: 'Credenciales incorrectas o error en el servidor',
         });
       }
+
     },
+
   });
 
   return (
-    <section className="login">
+    <div className="form-section ">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           form.handleSubmit();
         }}
-        className="form-container"
+        className='form-container glassmorphism'
       >
-        <div>
-          <h1 className="Regard">INICIA SESIÓN</h1>
+        <div className='Regard'>
+          <TypingText words={["Bienvenido", "Inicia sesión"]} />
         </div>
 
         <form.Field name="correoElectronico">
@@ -101,17 +104,17 @@ export default function LoginForm() {
         {formErrors.general && <p className="error">{formErrors.general}</p>}
 
         <div className="button-group">
-          <button
+          <button className='unselected'
             type="button"
             onClick={() => navigate({ to: '/Register' })}
           >
             Registrarse
           </button>
-          <button type="submit" disabled={mutation.isPending}>
+          <button className='selected' type="submit" disabled={mutation.isPending}>
             {mutation.isPending ? "Cargando..." : "Iniciar Sesión"}
           </button>
         </div>
       </form>
-    </section>
+    </div>
   );
 }

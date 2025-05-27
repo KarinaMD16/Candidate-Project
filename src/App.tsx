@@ -2,6 +2,9 @@ import { QueryClient, QueryClientProvider} from '@tanstack/react-query'
 import {  RouterProvider, createRouter } from '@tanstack/react-router'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { routeTree } from './routeTree.gen';
+import './App.css'
+import { AplicacionesProvider } from './context/ofertas/aplicacionesContextProvider';
+import { HabilidadesProvider } from './context/habilidades/habilidadesContextProvider';
 
 const queryClient = new QueryClient()
 
@@ -16,9 +19,14 @@ declare module "@tanstack/react-router" {
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
+      <HabilidadesProvider >
+        <AplicacionesProvider>
+          <RouterProvider router={router} />
+        </AplicacionesProvider>
+      </HabilidadesProvider>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
+
   )
 }
 

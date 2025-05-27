@@ -1,10 +1,11 @@
 import { useForm } from '@tanstack/react-form';
 import { registerSchema } from '../schema/schemaAuth';
-import { useRegister } from '../services/User/UserHook';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import type { RegisterFormFields } from '../schema/schemaAuth';
-import { getUserByemail } from '../services/User/UserService';
+import { getUserByemail } from '../services/user/UserService';
+import TypingText from './TypingText';
+import { useRegister } from '../hooks/user/UserHook';
 
 export default function RegisterForm() {
   const navigate = useNavigate();
@@ -58,16 +59,16 @@ export default function RegisterForm() {
   });
 
   return (
-    <section className="register">
+    <div className="form-section ">
       <form
         onSubmit={(e) => {
           e.preventDefault();
           form.handleSubmit();
         }}
-        className="form-container"
+        className="form-container glassmorphism"
       >
-        <div>
-          <h2>ÚNETE</h2>
+        <div className='Regard'>
+          <TypingText words={["Bienvenido", "Únete"]} />
         </div>
 
         <form.Field name="nombre">
@@ -141,17 +142,17 @@ export default function RegisterForm() {
         {formErrors.general && <p className="error">{formErrors.general}</p>}
 
         <div className="button-group">
-          <button
+          <button className="unselected"
             type="button"
             onClick={() => navigate({ to: "/Login" })}
           >
             Iniciar Sesión
           </button>
-          <button type="submit" disabled={mutation.isPending}>
+          <button className='selected' type="submit" disabled={mutation.isPending}>
             {mutation.isPending ? "Cargando..." : "Registrarse"}
           </button>
         </div>
       </form>
-    </section>
+    </div>
   );
 }

@@ -1,5 +1,5 @@
 export interface User {
-    id: number,
+    Id: number,
     nombre: string,
     apellido: string,
     correoElectronico: string,
@@ -11,7 +11,7 @@ export interface User {
 
 
 export const UserInitalSate = {
-    id: 0,
+    Id: 0,
     nombre: '',
     apellido: '',
     correoElectronico: '',

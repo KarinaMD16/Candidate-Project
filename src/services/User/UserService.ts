@@ -2,7 +2,7 @@ import type { User, UserFormFields } from '../../models/User/User'
 import axiosPrivate from '../../api/apiAuth'
 
 export async function createUser(user: UserFormFields): Promise<User>{
-    const response = await axiosPrivate.post(`/Candidate`, user);
+    const response = await axiosPrivate.post(`/Candidate/register`, user);
     return response.data;
 }
 export async function loginUser(email: string, password: string): Promise<User> {
