@@ -7,7 +7,7 @@ type HabilidadesContextTypes = {
 }
 
 const HabilidadesContext = createContext<HabilidadesContextTypes>({
-  habilidades: [],
+  habilidades: [] as number[],
   agregarHabilidad: () => {},
   quitarHabilidad: () => {},
 });
