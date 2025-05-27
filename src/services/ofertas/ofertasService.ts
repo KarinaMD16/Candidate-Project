@@ -1,11 +1,10 @@
 import axiosPrivate from "../../api/apiAuth";
 import type { Oferta } from "../../models/Oferta";
 
-export const getOfertas = async (): Promise<Oferta[]> => {
-  const response = await axiosPrivate.get<Oferta[]>("/Ofertas");
+export const getOfertas = async (id:number): Promise<Oferta[]> => {
+  const response = await axiosPrivate.get<Oferta[]>(`/Ofertas/usuario/${id}/ofertas`);
   return response.data;
 };
-
 
 export const getMatchingOffertas = async (id:number): Promise<Oferta[]> => {
   const response = await axiosPrivate.get<Oferta[]>(`/Ofertas/candidato/${id}/ofertas`);

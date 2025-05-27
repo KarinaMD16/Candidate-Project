@@ -3,8 +3,7 @@ import AplicacionesContext from "./aplicacionesContext";
 
 type AplicacionesContextTypes = {
 children: JSX.Element;
-}
-
+};
 
 export const AplicacionesProvider = ({ children }: AplicacionesContextTypes ) => {
   const [aplicaciones, setAplicaciones] = useState<number[]>([]);

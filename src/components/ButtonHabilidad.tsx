@@ -1,4 +1,4 @@
-import { useToggleHabilidad } from "../context/habilidades/useToggleHabilidades";
+import { useToggleHabilidad } from "../hooks/habilidades/useToggleHabilidades";
 
 type buttonHabilidadProps = {
   idHabilidad: number;

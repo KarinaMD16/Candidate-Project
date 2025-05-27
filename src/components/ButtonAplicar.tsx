@@ -14,6 +14,7 @@ const ButtonAplicar = ({ idOferta }: ofertadId) => {
 
     const isApplied = aplicaciones.includes(idOferta);
 
+
     const handleApply = () => {
         mutate({
             candidatoId: perfil.id,

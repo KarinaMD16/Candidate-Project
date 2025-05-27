@@ -12,18 +12,19 @@ export const Route = createFileRoute('/(dashboard)/Ofertas')({
 function RouteComponent() {
   const [modo, setModo] = useState<'todas' | 'matching' | 'aplicaciones'>('matching');
 
-
   const {perfil} = useGetProfile()
-  const { ofertas, isPending, error } = useGetOfertas();
-  const { matchingOfertas, isPendingMatching, errorMatching } = useGetMatchingOfertas(perfil?.id, {
-    enabled: modo && !!perfil?.id,
-  });
-
   
+  const { ofertas, isPending, error } = useGetOfertas(perfil?.id, {
+      enabled: modo === 'todas' && !!perfil?.id,
+    });
+
+  const { matchingOfertas, isPendingMatching, errorMatching } = useGetMatchingOfertas(perfil?.id, {
+    enabled: modo === 'matching' && !!perfil?.id,
+   });
+
   const { aplicaciones, isPendingAplicaciones, errorAplicaciones } = useGetAplicaciones(perfil?.id, {
     enabled: modo === 'aplicaciones' && !!perfil?.id,
   });
-
 
   const handleVerParaMi = () => {
     setModo(modo === 'matching' ? 'todas' : 'matching');
@@ -47,7 +48,7 @@ function RouteComponent() {
     return <div>error al cargar datos</div>;
   }
 
-  return <div>
+  return (<div>
     <Header />
     <div className='opciones'>
       <button className='selected' onClick={ handleVerParaMi }>
@@ -66,5 +67,5 @@ function RouteComponent() {
           </div>
         ))}      
     </div>
-  </div>
+  </div>)
 }

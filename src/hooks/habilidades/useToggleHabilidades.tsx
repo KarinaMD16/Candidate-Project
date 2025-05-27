@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { useDeleteHabilidad, usePostHabilidadesCandidato } from "../../hooks/habilidades/HabilidadHook";
-import { useGetProfile } from "../../hooks/perfil/ProfileHook";
-import HabilidadesContext from "./habilidadesContext";
+import { useDeleteHabilidad, usePostHabilidadesCandidato } from "./HabilidadHook";
+import { useGetProfile } from "../perfil/ProfileHook";
+import HabilidadesContext from "../../context/habilidades/habilidadesContext";
 
 export function useToggleHabilidad() {
   const { perfil } = useGetProfile();
@@ -10,7 +10,7 @@ export function useToggleHabilidad() {
   const eliminarHabilidad = useDeleteHabilidad();
 
   const toggleHabilidad = (idHabilidad: number) => {
-  const isSelected = habilidades.includes(idHabilidad);
+    const isSelected = habilidades.includes(idHabilidad);
 
     if (isSelected) {
       eliminarHabilidad.mutate({

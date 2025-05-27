@@ -3,13 +3,15 @@ import axiosPrivate from "../../api/apiAuth";
 import type { Oferta } from "../../models/Oferta";
 import { createApplication, getAplicaciones } from "../../services/ofertas/ofertasService";
 
-export const useGetOfertas = () => {
+export const useGetOfertas = (id: number | undefined, options = {}) => {
   const { data, isPending, error } = useQuery({
-    queryKey: ['ofertas'],
+    queryKey: ['ofertas', id],
     queryFn: async () => {
-      const response = await axiosPrivate.get<Oferta[]>('/Ofertas');
+      const response = await axiosPrivate.get<Oferta[]>(`Ofertas/usuario/${id}/ofertas`);
       return response.data;
     },
+    enabled: !!id, 
+    ...options
   });
 
   return {
