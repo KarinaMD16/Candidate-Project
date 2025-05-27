@@ -1,6 +1,6 @@
 
 export interface Habilidad{
-    id:string,
+    id:number,
     Nombre:string,
     ofertaHabilidad:[]
 }

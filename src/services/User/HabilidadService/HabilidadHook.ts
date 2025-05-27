@@ -30,3 +30,11 @@ export function useHabilidades() {
 
   return { habilidades, loading, error };
 }
+
+
+//hook para llamar al servicio 
+
+/*export function  =()=>{
+
+  
+}*/

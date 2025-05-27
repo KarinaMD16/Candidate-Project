@@ -1,3 +1,5 @@
+import type { Habilidad } from "./Habilidad"
+
 export interface User {
     id: number,
     nombre: string,
@@ -30,4 +32,11 @@ export type UserFormFields = {
 export type LoginFormFields = {
     correoElectronico: string,
     password: string
+}
+export interface Perfil  {
+    id: number,
+    nombre: string,
+    apellido: string,
+    correoElectronico: string,
+    habilidades : Habilidad[]
 }

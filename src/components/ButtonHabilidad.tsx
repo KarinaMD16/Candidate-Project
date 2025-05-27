@@ -1,17 +1,19 @@
-interface HabilidadButtonProps{
-    selected: boolean
-    onClick: ()=> void 
-    children: React.ReactNode
+interface HabilidadButtonProps {
+  id: number;
+  selected: boolean;
+  onToggle:(id:number)=> void;
+  //onClick: () => void;
+  children: React.ReactNode;
 }
 
-export default function HabilidadButton({ onClick, selected, children }: HabilidadButtonProps) {
+export default function HabilidadButton({ id, selected,onToggle, children }: HabilidadButtonProps) {
+     //prueba
   return (
     <button
-      onClick={onClick}
-      className={selected ? 'selected' : ''}
-      //className={`${HabilidadButton} ${selected ?selected : ''}`}
+      onClick={()=>onToggle(id)}
+      className={selected ? 'selected' : 'habilidad-disponible'}
     >
       {children}
     </button>
-  )
+  );
 }
