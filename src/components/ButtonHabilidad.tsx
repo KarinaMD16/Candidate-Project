@@ -1,17 +1,20 @@
-interface HabilidadButtonProps{
-    selected: boolean
-    onClick: ()=> void 
-    children: React.ReactNode
+import { useToggleHabilidad } from "../context/habilidades/useToggleHabilidades";
+
+type ofertadId = {
+  idHabilidad: number;
+  children?: React.ReactNode;
 }
 
-export default function HabilidadButton({ onClick, selected, children }: HabilidadButtonProps) {
+const ButtonHabilidad = ({ idHabilidad, children }: ofertadId) => {
+  const { toggleHabilidad, habilidades } = useToggleHabilidad();
+  const isSelected = habilidades.includes(idHabilidad);
+
+
   return (
-    <button
-      onClick={onClick}
-      className={selected ? 'selected' : ''}
-      //className={`${HabilidadButton} ${selected ?selected : ''}`}
-    >
+    <button className={isSelected ? "selected" : "unselected"} onClick={() => toggleHabilidad(idHabilidad)}>
       {children}
     </button>
   )
 }
+export default ButtonHabilidad;
+    // This button is used to toggle a skill

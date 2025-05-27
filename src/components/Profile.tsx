@@ -1,7 +1,8 @@
 import { useGetProfile } from "../hooks/perfil/ProfileHook";
-import { useGetHabilidades, usePostHabilidadesCandidato } from "../hooks/habilidades/HabilidadHook";
+import { useGetHabilidades } from "../hooks/habilidades/HabilidadHook";
 import type { Habilidad } from "../models/Habilidad";
 import Header from "./Header";
+import ButtonHabilidad from "./ButtonHabilidad";
 
  function Profile(){
  const {
@@ -15,16 +16,7 @@ import Header from "./Header";
     loadingHabilidades,
     errorHabilidades,
   } = useGetHabilidades();
-
   
-const habilidadesCandidato = usePostHabilidadesCandidato();
-
-  const handleToggle = (habilidad: Habilidad) => {
-   habilidadesCandidato.mutate({
-      idCandidato: perfil.id,
-      idHabilidad: habilidad.id,
-    });
-  }
 
   if (loadingHabilidades || loadingPerfil) return <p>Cargando perfil...</p>;
   if (errorPerfil || errorHabilidades) return <p>Error al cargar perfil o habilidades</p>;
@@ -46,10 +38,10 @@ return (
 
             <div className="habilidades-container">
               {Habilidades?.map((habilidad: Habilidad) => (
-                <button onClick={() => {handleToggle(habilidad)}} key={habilidad.id} className="unselected-hab">
+                <ButtonHabilidad key={habilidad.id} idHabilidad={habilidad.id}> 
                   {habilidad.name}
-                </button>
-                ))}
+                </ButtonHabilidad>
+              ))}
               </div>
           </div>
 

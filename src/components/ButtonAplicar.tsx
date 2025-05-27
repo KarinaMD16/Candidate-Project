@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { useCreateApplication } from "../hooks/ofertas/ofertasHooks";
 import { useGetProfile } from "../hooks/perfil/ProfileHook";
-import AplicacionesContext from "../context/aplicacionesContext";
+import AplicacionesContext from "../context/ofertas/aplicacionesContext";
 
 type ofertadId = {
     idOferta: number;

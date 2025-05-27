@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { getHabilidades, postHabilidadesCandidato } from "../../services/habilidades/habilidadesService"
+import { deleteHabilidad, getHabilidades, postHabilidadesCandidato } from "../../services/habilidades/habilidadesService"
 
 export function useGetHabilidades() {
   const { data: Habilidades, isLoading, error } = useQuery({
@@ -28,4 +28,19 @@ export function usePostHabilidadesCandidato() {
     })
 
     return mutation;
+}
+
+export function useDeleteHabilidad() {
+  const queryClient = useQueryClient();
+
+  const mutation = useMutation({
+    mutationFn: ({ candidatoId, habilidadId }: { candidatoId: number; habilidadId: number }) =>
+      deleteHabilidad(candidatoId, habilidadId),
+    onSuccess: () => {
+      // Invalidate and refetch
+      queryClient.invalidateQueries({ queryKey: ['habilidades'] })
+    },
+  })
+
+  return mutation;
 }

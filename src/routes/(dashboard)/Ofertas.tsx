@@ -51,9 +51,9 @@ function RouteComponent() {
     <Header />
     <div className='opciones'>
       <button className='selected' onClick={ handleVerParaMi }>
-        {modo === 'matching' ? "Ver para mi" : "Ver todas"}
+        {modo === 'matching' ? "Ver todas" : "Ver para mi"}
       </button>
-
+      
       <button className='selected' onClick={ handleVerAplicaciones }>
         Ver aplicaciones
       </button>

@@ -10,3 +10,8 @@ export const postHabilidadesCandidato = async ( idCandidato?: number, idHabilida
   const response = await axiosPrivate.post<Habilidad[]>(`/Candidate/asociarHabilidad?candidatoId=${idCandidato}&habilidadId=${idHabilidad}`);
   return response.data;
 };
+
+export async function deleteHabilidad(candidatoId:number, habilidadId:number){
+    const response = await axiosPrivate.delete(`/Candidate/${candidatoId}/eliminarHabilidad/${habilidadId}`);
+    return response.data;
+}
