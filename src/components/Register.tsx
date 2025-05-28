@@ -5,7 +5,7 @@ import { useState } from 'react';
 import type { RegisterFormFields } from '../schema/schemaAuth';
 import TypingText from './TypingText';
 import { useRegister } from '../hooks/user/UserHook';
-import { getUserByemail } from '../services/user/UserService';
+import { getUserByemail } from '../services/User/UserService';
 
 export default function RegisterForm() {
   const navigate = useNavigate();
