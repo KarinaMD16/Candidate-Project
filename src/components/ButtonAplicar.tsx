@@ -1,32 +1,24 @@
-import { useContext } from "react";
-import { useCreateApplication } from "../hooks/ofertas/ofertasHooks";
-import { useGetProfile } from "../hooks/perfil/ProfileHook";
-import AplicacionesContext from "../context/ofertas/aplicacionesContext";
 
-type ofertadId = {
-    idOferta: number;
+import useToggleAplicaciones from "../context/ofertas/useToggleAplicaciones";
+import type { Oferta } from "../models/Oferta";
+
+type aplicarButtonProps = {
+    ofertaAAplicar: Oferta;
+    disable: boolean
 }
 
-const ButtonAplicar = ({ idOferta }: ofertadId) => {
-    const { aplicaciones, agregarAplicacion } = useContext(AplicacionesContext);
-    const { perfil } = useGetProfile();
-    const { mutate } = useCreateApplication();
+const ButtonAplicar = ({ ofertaAAplicar, disable }: aplicarButtonProps) => {
+    const { toggleAplicacion, aplicaciones } = useToggleAplicaciones()
+    const isApplied = aplicaciones.includes(ofertaAAplicar.id);
 
-    const isApplied = aplicaciones.includes(idOferta);
-
-
-    const handleApply = () => {
-        mutate({
-            candidatoId: perfil.id,
-            ofertaId: idOferta,
-        },{
-        onSuccess: () => agregarAplicacion(idOferta)
-     });
-    }
 
   return (
-    <button className={isApplied ? "selected" : "unselected"} onClick={handleApply}>
-        {isApplied ? "Aplicada" : "Aplicar"}
+    <button
+      className={isApplied ? "selected" : disable ? "disabled" : "unselected"}
+      onClick={() => toggleAplicacion(ofertaAAplicar)}
+      disabled={disable}
+    >
+      {isApplied ? "Aplicada" : "Aplicar"}
     </button>
 
   )

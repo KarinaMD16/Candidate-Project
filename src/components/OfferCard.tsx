@@ -5,17 +5,19 @@ import HabilidadesContext from "../context/habilidades/habilidadesContext"
 
 type offerProps = {
     offer: Oferta
-    
 }
 
 const OfferCard = ({ offer }: offerProps) => {
   const { habilidades } = useContext(HabilidadesContext)
+  const tieneHabilidad = offer.habilidades.some(h => habilidades.includes(h.id));
 
+  
   return (
     <div className="page offerCard glassmorphism" key={offer.id}>
       <div className="offer-apply">
         <h3>Oferta</h3>
-        <ButtonAplicar idOferta={offer.id} />
+        <ButtonAplicar disable={!tieneHabilidad} ofertaAAplicar={offer} />
+        
       </div>
 
       <div className="offerCard-data">
@@ -25,8 +27,10 @@ const OfferCard = ({ offer }: offerProps) => {
 
         <div className="offer-abilities">
           <h4>Habilidades: </h4>
+          
           {offer.habilidades.map((habilidad) => {
             const isSelected = habilidades.includes(habilidad.id);
+
             return (
               <div
                 key={habilidad.id}

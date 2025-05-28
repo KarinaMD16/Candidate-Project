@@ -12,18 +12,14 @@ export const Route = createFileRoute('/(dashboard)/Ofertas')({
 function RouteComponent() {
   const [modo, setModo] = useState<'todas' | 'matching' | 'aplicaciones'>('matching');
 
-
-  const {perfil} = useGetProfile()
+  const { perfil } = useGetProfile()
   const { ofertas, isPending, error } = useGetOfertas();
   const { matchingOfertas, isPendingMatching, errorMatching } = useGetMatchingOfertas(perfil?.id, {
     enabled: modo && !!perfil?.id,
   });
-
-  
   const { aplicaciones, isPendingAplicaciones, errorAplicaciones } = useGetAplicaciones(perfil?.id, {
     enabled: modo === 'aplicaciones' && !!perfil?.id,
   });
-
 
   const handleVerParaMi = () => {
     setModo(modo === 'matching' ? 'todas' : 'matching');
@@ -34,18 +30,18 @@ function RouteComponent() {
   }
 
   let datosAMostrar = ofertas;
-
   if (modo === 'matching') datosAMostrar = matchingOfertas;
   if (modo === 'aplicaciones') datosAMostrar = aplicaciones;
 
+  const isLoading =
+    isPending ||
+    (modo === 'matching' && isPendingMatching) ||
+    (modo === 'aplicaciones' && isPendingAplicaciones);
 
-  if (isPending || (modo === 'matching' && isPendingMatching) || (modo === 'aplicaciones' && isPendingAplicaciones)) {
-  return <div>cargando...</div>;
-  }
-
-  if (error || (modo === 'matching' && errorMatching) || (modo === 'aplicaciones' && errorAplicaciones)) {
-    return <div>error al cargar datos</div>;
-  }
+  const hasError =
+    error ||
+    (modo === 'matching' && errorMatching) ||
+    (modo === 'aplicaciones' && errorAplicaciones);
 
   return <div>
     <Header />
@@ -55,9 +51,18 @@ function RouteComponent() {
       </button>
       
       <button className='selected' onClick={ handleVerAplicaciones }>
-        Ver aplicaciones
+        {modo === 'aplicaciones' ? "Viendo aplicaciones" : "Ver aplicaciones"}
+        
       </button>
     </div>
+
+    {isLoading && <p>Cargando...</p>}
+    
+    {hasError && <p>Ocurrió un error al cargar las ofertas.</p>}
+    
+    {!isLoading && !hasError && modo === 'aplicaciones' && aplicaciones?.length === 0 && (
+        <p>No hay aplicaciones aún.</p>
+    )}
 
     <div className='offer-container'>
        {datosAMostrar && datosAMostrar.map(oferta => (
