@@ -2,37 +2,30 @@ import { useContext } from "react";
 import { useCreateApplication, useDeleteAplicacion } from "../../hooks/ofertas/ofertasHooks";
 import { useGetProfile } from "../../hooks/perfil/ProfileHook";
 import AplicacionesContext from "./aplicacionesContext";
-import HabilidadesContext from "../habilidades/habilidadesContext";
+import type { Oferta } from "../../models/Oferta";
 
 
 const useToggleAplicaciones = () => {
   const { perfil } = useGetProfile(); 
   const { aplicaciones, agregarAplicacion, quitarAplicacion } = useContext(AplicacionesContext);
-  const { habilidades } = useContext(HabilidadesContext);
   
   const hacerAplicacion = useCreateApplication();
   const eliminarOferta = useDeleteAplicacion();
 
-  const toggleAplicacion = (idOferta: number, idHabilidad: number) => {
-  const isAplicable = habilidades.includes(idHabilidad);
-  const isSelected = aplicaciones.includes(idOferta);
+  const toggleAplicacion = (oferta: Oferta) => {
+  const isSelected = aplicaciones.includes(oferta.id);
 
-    if (isSelected) {
+    if (isSelected ) {
       eliminarOferta.mutate({
         candidatoId: perfil.id,
-        ofertaId: idOferta,
+        ofertaId: oferta.id,
       }, {
-        onSuccess: () => quitarAplicacion(idOferta),
+        onSuccess: () => quitarAplicacion(oferta.id),
       });
     } else {
-      if(isAplicable){
-        hacerAplicacion.mutate({
-        candidatoId: perfil.id,
-        ofertaId: idOferta,
-      }, {
-        onSuccess: () => agregarAplicacion(idOferta),
-      });
-      }
+      hacerAplicacion.mutate(
+      { candidatoId: perfil.id, ofertaId: oferta.id },
+      { onSuccess: () => agregarAplicacion(oferta.id) });
     }
   };
   

@@ -40,8 +40,9 @@ input{
   display: flex;
   align-items: center;
   flex-shrink: 0;
-  width: 20vw;
-  height: 5vh;
+  width: clamp(200px, 20vw, 300px);
+  height: 2.5rem;
+
   padding-left: 1vw;
 }
 
@@ -51,35 +52,94 @@ input::placeholder {
 }
 
 button {
-  border-radius: 25px;
+  position: relative;
+  overflow: hidden;
   border: 1px solid #8DA0EA;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   display: flex;
-  padding: 3px 11px;
   justify-content: center;
   align-items: center;
   gap: 10px;
-  height: 5vh;
   cursor: pointer;
   font-weight: bold;
+  background: transparent;
+  color: inherit;
+  z-index: 0;
+  border-radius: 25px;
+  padding: 3px 11px;
+  height: 5vh;
 }
 
-.unselected{
+/* Franja brillante */
+button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -75%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: skew(-20deg);
+  transition: none;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* Al hacer hover activa la animación */
+button:hover::before {
+  animation: shineInfinite 4s ease-in-out infinite;
+  opacity: 1;
+}
+
+@keyframes shineInfinite {
+  0% {
+    left: -75%;
+    opacity: 1;
+  }
+  50% {
+    left: 120%;
+    opacity: 1;
+  }
+  100% {
+    left: 120%;
+    opacity: 0;
+  }
+}
+
+
+.unselected {
   border-radius: 25px;
   border: 1px solid #8DA0EA;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  background: none;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   padding: 3px 11px;
+  color: rgb(255, 255, 255); /* texto más tenue */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.unselected:hover {
+  background: #8da0eaa2; 
+  color: rgb(255, 255, 255); /* texto más tenue */
 }
 
 .selected {
   padding: 3px 11px;
   border-radius: 25px;
   background: #8DA0EA;
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color:#000
+  color: #000;
+  transition: box-shadow 0.3s ease, opacity 0.3s ease;
+  cursor: pointer;
 }
 
+.selected:hover {
+  background: #8DA0EA;
+}
 
 .disabled {
   padding: 3px 11px;
@@ -109,7 +169,7 @@ button {
 }
 
 .form-section {
-  position: fixed; /* Esto es clave */
+  position: fixed; 
   top: 0;
   left: 0;
   width: 100vw;
@@ -119,7 +179,7 @@ button {
   justify-content: center;
   align-items: center;
   overflow: hidden;
-  z-index: 10; /* Asegúrate de que esté por encima si hay fondo */
+  z-index: 10; 
 }
 
 .form-container{
@@ -177,10 +237,6 @@ button {
   height:85vh;
 }
 
-.logout {
-  top: 0;
-}
-
 .page{
   width: 100%;
   display: flex;
@@ -189,26 +245,17 @@ button {
 
 .page-header {
   position: sticky;
-  top: 0;
+  top: .5rem;
   width: 100%;
   padding: 10px 20px;
   z-index: 1000;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-header{
-  top: 1rem;
-  position: sticky;
-  z-index: 1000;
-  
-}
-
 nav{
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 100%;
-  display: flex;
   justify-content: space-evenly;
 }
 
@@ -220,6 +267,20 @@ nav{
   display: flex;
   flex-direction: column;
   width: 40vw;
+}
+
+.offerCard {
+  position: relative;
+  border-radius: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.29);
+  background: rgba(196, 196, 196, 0.12);
+  backdrop-filter: blur(5.7px);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.offerCard:hover {
+  border-color: #8DA0EA; 
+  border-width: 1.5px;
 }
 
 .offer-apply{
@@ -259,8 +320,4 @@ nav{
   display: flex;
   justify-content: end;
   gap: 2vw;
-}
-
-.ability{
-  
 }

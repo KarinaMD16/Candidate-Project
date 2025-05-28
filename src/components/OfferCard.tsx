@@ -16,15 +16,7 @@ const OfferCard = ({ offer }: offerProps) => {
     <div className="page offerCard glassmorphism" key={offer.id}>
       <div className="offer-apply">
         <h3>Oferta</h3>
-        {offer.habilidades.map((habilidad) => {
-            
-            return (
-              <div
-                key={habilidad.id}
-              ><ButtonAplicar disable={!tieneHabilidad} idHabilidad={habilidad.id} idOferta={offer.id} />
-              </div>
-            )
-          })}
+        <ButtonAplicar disable={!tieneHabilidad} ofertaAAplicar={offer} />
         
       </div>
 

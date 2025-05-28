@@ -1,22 +1,24 @@
 
 import useToggleAplicaciones from "../context/ofertas/useToggleAplicaciones";
+import type { Oferta } from "../models/Oferta";
 
 type aplicarButtonProps = {
-    idOferta: number;
-    idHabilidad: number,
+    ofertaAAplicar: Oferta;
     disable: boolean
 }
 
-const ButtonAplicar = ({ idOferta, idHabilidad, disable }: aplicarButtonProps) => {
+const ButtonAplicar = ({ ofertaAAplicar, disable }: aplicarButtonProps) => {
     const { toggleAplicacion, aplicaciones } = useToggleAplicaciones()
-    const isApplied = aplicaciones.includes(idOferta);
+    const isApplied = aplicaciones.includes(ofertaAAplicar.id);
 
-  const styleClass = isApplied ? "selected" : "unselected";
-  const finalStyleClass = disable ? `${styleClass} disabled` : styleClass;
 
   return (
-    <button  className={finalStyleClass} onClick={() => toggleAplicacion(idOferta, idHabilidad)}>
-        {isApplied ? "Aplicada" : "Aplicar"}
+    <button
+      className={isApplied ? "selected" : disable ? "disabled" : "unselected"}
+      onClick={() => toggleAplicacion(ofertaAAplicar)}
+      disabled={disable}
+    >
+      {isApplied ? "Aplicada" : "Aplicar"}
     </button>
 
   )
