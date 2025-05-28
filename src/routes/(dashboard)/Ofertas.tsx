@@ -12,18 +12,15 @@ export const Route = createFileRoute('/(dashboard)/Ofertas')({
 function RouteComponent() {
   const [modo, setModo] = useState<'todas' | 'matching' | 'aplicaciones'>('matching');
 
-
-  const {perfil} = useGetProfile()
+  const { perfil } = useGetProfile()
   const { ofertas, isPending, error } = useGetOfertas();
   const { matchingOfertas, isPendingMatching, errorMatching } = useGetMatchingOfertas(perfil?.id, {
     enabled: modo && !!perfil?.id,
   });
 
-  
   const { aplicaciones, isPendingAplicaciones, errorAplicaciones } = useGetAplicaciones(perfil?.id, {
     enabled: modo === 'aplicaciones' && !!perfil?.id,
   });
-
 
   const handleVerParaMi = () => {
     setModo(modo === 'matching' ? 'todas' : 'matching');
@@ -39,13 +36,28 @@ function RouteComponent() {
   if (modo === 'aplicaciones') datosAMostrar = aplicaciones;
 
 
-  if (isPending || (modo === 'matching' && isPendingMatching) || (modo === 'aplicaciones' && isPendingAplicaciones)) {
+  if (isPending || (modo === 'matching' && isPendingMatching) ) {
   return <div>cargando...</div>;
   }
 
-  if (error || (modo === 'matching' && errorMatching) || (modo === 'aplicaciones' && errorAplicaciones)) {
+  if (modo === 'aplicaciones' && isPendingAplicaciones){
+    return <div>cargando aplicaciones...</div>;
+  }
+
+  if (error || (modo === 'matching' && errorMatching)) {
     return <div>error al cargar datos</div>;
   }
+  if (modo === 'aplicaciones' && errorAplicaciones){
+    return <div>error al cargar aplicaciones</div>;
+  }
+
+  if (aplicaciones === null) {
+  return <p>Cargando aplicaciones...</p>;
+}
+
+if (aplicaciones?.length === 0) {
+  return <p>No hay aplicaciones aún.</p>;
+}
 
   return <div>
     <Header />
@@ -55,7 +67,8 @@ function RouteComponent() {
       </button>
       
       <button className='selected' onClick={ handleVerAplicaciones }>
-        Ver aplicaciones
+        {modo === 'aplicaciones' ? "Viendo aplicaciones" : "Ver aplicaciones"}
+        
       </button>
     </div>
 
