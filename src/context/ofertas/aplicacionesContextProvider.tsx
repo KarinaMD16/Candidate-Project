@@ -5,7 +5,7 @@ import { useGetAplicaciones } from "../../hooks/ofertas/ofertasHooks";
 
 export const AplicacionesProvider = ({ children }: { children: React.ReactNode }) => {
   const [aplicaciones, setAplicaciones] = useState<number[]>([]);
-  const { perfil } = useGetProfile();
+  const { perfil, loading } = useGetProfile();
   const { aplicaciones: aplicacionesCargadas } = useGetAplicaciones(perfil?.id, {
     enabled: !!perfil?.id,
   });
@@ -19,11 +19,11 @@ export const AplicacionesProvider = ({ children }: { children: React.ReactNode }
   };
 
   useEffect(() => {
-    if (aplicacionesCargadas) {
+    if (!loading && aplicacionesCargadas) {
       const ids = aplicacionesCargadas.map((oferta: { id: number }) => oferta.id);
       setAplicaciones(ids);
     }
-  }, [aplicacionesCargadas]);
+  }, [aplicacionesCargadas, loading]);
 
   return (
     <AplicacionesContext.Provider value={{ aplicaciones, agregarAplicacion, quitarAplicacion }}>

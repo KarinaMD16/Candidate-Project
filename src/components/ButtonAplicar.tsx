@@ -1,31 +1,16 @@
-import { useContext } from "react";
-import { useCreateApplication } from "../hooks/ofertas/ofertasHooks";
-import { useGetProfile } from "../hooks/perfil/ProfileHook";
-import AplicacionesContext from "../context/ofertas/aplicacionesContext";
+
+import useToggleAplicaciones from "../context/ofertas/useToggleAplicaciones";
 
 type ofertadId = {
     idOferta: number;
 }
 
 const ButtonAplicar = ({ idOferta }: ofertadId) => {
-    const { aplicaciones, agregarAplicacion } = useContext(AplicacionesContext);
-    const { perfil } = useGetProfile();
-    const { mutate } = useCreateApplication();
-
+    const { toggleAplicacion, aplicaciones } = useToggleAplicaciones()
     const isApplied = aplicaciones.includes(idOferta);
 
-
-    const handleApply = () => {
-        mutate({
-            candidatoId: perfil.id,
-            ofertaId: idOferta,
-        },{
-        onSuccess: () => agregarAplicacion(idOferta)
-     });
-    }
-
   return (
-    <button className={isApplied ? "selected" : "unselected"} onClick={handleApply}>
+    <button className={isApplied ? "selected" : "unselected"} onClick={() => toggleAplicacion(idOferta)}>
         {isApplied ? "Aplicada" : "Aplicar"}
     </button>
 
