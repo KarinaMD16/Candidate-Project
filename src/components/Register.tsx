@@ -3,9 +3,9 @@ import { registerSchema } from '../schema/schemaAuth';
 import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import type { RegisterFormFields } from '../schema/schemaAuth';
-import { getUserByemail } from '../services/user/UserService';
 import TypingText from './TypingText';
 import { useRegister } from '../hooks/user/UserHook';
+import { getUserByemail } from '../services/user/UserService';
 
 export default function RegisterForm() {
   const navigate = useNavigate();
