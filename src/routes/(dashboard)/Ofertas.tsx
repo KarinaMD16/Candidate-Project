@@ -17,7 +17,6 @@ function RouteComponent() {
   const { matchingOfertas, isPendingMatching, errorMatching } = useGetMatchingOfertas(perfil?.id, {
     enabled: modo && !!perfil?.id,
   });
-
   const { aplicaciones, isPendingAplicaciones, errorAplicaciones } = useGetAplicaciones(perfil?.id, {
     enabled: modo === 'aplicaciones' && !!perfil?.id,
   });
@@ -31,33 +30,18 @@ function RouteComponent() {
   }
 
   let datosAMostrar = ofertas;
-
   if (modo === 'matching') datosAMostrar = matchingOfertas;
   if (modo === 'aplicaciones') datosAMostrar = aplicaciones;
 
+  const isLoading =
+    isPending ||
+    (modo === 'matching' && isPendingMatching) ||
+    (modo === 'aplicaciones' && isPendingAplicaciones);
 
-  if (isPending || (modo === 'matching' && isPendingMatching) ) {
-  return <div>cargando...</div>;
-  }
-
-  if (modo === 'aplicaciones' && isPendingAplicaciones){
-    return <div>cargando aplicaciones...</div>;
-  }
-
-  if (error || (modo === 'matching' && errorMatching)) {
-    return <div>error al cargar datos</div>;
-  }
-  if (modo === 'aplicaciones' && errorAplicaciones){
-    return <div>error al cargar aplicaciones</div>;
-  }
-
-  if (aplicaciones === null) {
-  return <p>Cargando aplicaciones...</p>;
-}
-
-if (aplicaciones?.length === 0) {
-  return <p>No hay aplicaciones aún.</p>;
-}
+  const hasError =
+    error ||
+    (modo === 'matching' && errorMatching) ||
+    (modo === 'aplicaciones' && errorAplicaciones);
 
   return <div>
     <Header />
@@ -71,6 +55,14 @@ if (aplicaciones?.length === 0) {
         
       </button>
     </div>
+
+    {isLoading && <p>Cargando...</p>}
+    
+    {hasError && <p>Ocurrió un error al cargar las ofertas.</p>}
+    
+    {!isLoading && !hasError && modo === 'aplicaciones' && aplicaciones?.length === 0 && (
+        <p>No hay aplicaciones aún.</p>
+    )}
 
     <div className='offer-container'>
        {datosAMostrar && datosAMostrar.map(oferta => (

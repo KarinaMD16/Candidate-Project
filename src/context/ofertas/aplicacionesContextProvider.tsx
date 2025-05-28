@@ -19,11 +19,11 @@ export const AplicacionesProvider = ({ children }: { children: React.ReactNode }
   };
 
   useEffect(() => {
-    if (!loading && aplicacionesCargadas) {
-      const ids = aplicacionesCargadas.map((oferta: { id: number }) => oferta.id);
-      setAplicaciones(ids);
-    }
-  }, [aplicacionesCargadas, loading]);
+  if (!loading && aplicacionesCargadas !== undefined && aplicacionesCargadas !== null) {
+    const ids = aplicacionesCargadas.map((oferta: { id: number }) => oferta.id);
+    setAplicaciones(ids);
+  }
+}, [aplicacionesCargadas, loading]);
 
   return (
     <AplicacionesContext.Provider value={{ aplicaciones, agregarAplicacion, quitarAplicacion }}>
