@@ -2,8 +2,6 @@ import { createFileRoute, redirect } from '@tanstack/react-router'
 import { isAuthenticated } from '../../utils/auth'
 import Profile from '../../components/Profile'
 
-
-
 export const Route = createFileRoute('/(dashboard)/Perfil')({
     beforeLoad: () => {
         if (!isAuthenticated()) {
@@ -12,10 +10,5 @@ export const Route = createFileRoute('/(dashboard)/Perfil')({
             })
         }
     },
-  component: PerfilComponent,
+  component: Profile,
 })
-
-function PerfilComponent() {
-  return <Profile/>
-
-}

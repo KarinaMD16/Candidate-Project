@@ -23,3 +23,8 @@ export const getAplicaciones = async (id:number): Promise<Oferta[]> => {
   const response = await axiosPrivate.get<Oferta[]>(`/Candidate/${id}/postulaciones`);
   return response.data;
 }
+
+export async function deleteAplicacion(candidatoId:number, ofertaId:number){
+    const response = await axiosPrivate.delete(`/Candidate/${candidatoId}/eliminiarPostulacion/${ofertaId}`);
+    return response.data;
+}
