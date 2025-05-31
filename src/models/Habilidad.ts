@@ -1,6 +1,7 @@
 export interface Habilidad{
     id:number,
-    name:string
+    name:string,
+    icono: string
 }
 
 export const HabilidadInitalSate = {

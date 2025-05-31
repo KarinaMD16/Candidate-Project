@@ -6,7 +6,7 @@ function TypingText({
   words,
   typingSpeed = 150,
   deleteSpeed = 100,
-  delayBetweenWords = 1000,
+  delayBetweenWords = 100000,
 }: {
   words: string[];
   typingSpeed?: number;

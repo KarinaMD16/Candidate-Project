@@ -10,7 +10,7 @@ const ButtonHabilidad = ({ idHabilidad, children }: ofertadId) => {
   const isSelected = habilidades.includes(idHabilidad);
 
   return (
-    <button className={isSelected ? "selected" : "unselected"} onClick={() => toggleHabilidad(idHabilidad)}>
+    <button className={isSelected ? "btn hab active" : "btn hab inactive"} onClick={() => toggleHabilidad(idHabilidad)}>
       {children}
     </button>
   )

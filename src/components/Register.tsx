@@ -67,7 +67,7 @@ export default function RegisterForm() {
           e.preventDefault();
           form.handleSubmit();
         }}
-        className="form-container glassmorphism"
+        className="form-container"
       >
         <div className='Regard'>
           <TypingText words={["Bienvenido", "Únete"]} />
@@ -144,13 +144,13 @@ export default function RegisterForm() {
         {formErrors.general && <p className="error">{formErrors.general}</p>}
 
         <div className="button-group">
-          <button className="unselected"
+          <button className="btn inactive"
             type="button"
             onClick={() => navigate({ to: "/Login" })}
           >
             Iniciar Sesión
           </button>
-          <button className='selected' type="submit" disabled={mutation.isPending}>
+          <button className='btn active' type="submit" disabled={mutation.isPending}>
             {mutation.isPending ? "Cargando..." : "Registrarse"}
           </button>
         </div>

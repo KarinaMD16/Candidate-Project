@@ -14,7 +14,7 @@ const ButtonAplicar = ({ ofertaAAplicar, disable }: aplicarButtonProps) => {
 
   return (
     <button
-      className={isApplied ? "selected" : disable ? "disabled" : "unselected"}
+      className={isApplied ? "btn active" : disable ? "disabled" : "btn inactive"}
       onClick={() => toggleAplicacion(ofertaAAplicar)}
       disabled={disable}
     >
