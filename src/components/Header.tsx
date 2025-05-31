@@ -1,35 +1,49 @@
-import { useNavigate, useRouter } from "@tanstack/react-router"
-import { signOut } from "../utils/auth"
-
+import { useNavigate, useRouter } from "@tanstack/react-router";
+import { signOut } from "../utils/auth";
+import { PiUser } from "react-icons/pi";
+import { TbReportSearch } from "react-icons/tb";
+import { CgLogOut } from "react-icons/cg";
 
 const Header = () => {
-    const navigate = useNavigate();
-    const router = useRouter();
+  const navigate = useNavigate();
+  const router = useRouter();
 
-    const currentPath = router.state.location.pathname;
+  const currentPath = router.state.location.pathname;
 
-    const classnamePerfil =  currentPath === '/Perfil'
-    const classnameOfertas = currentPath === '/Ofertas';
+  const isPerfil = currentPath === "/Perfil";
+  const isOfertas = currentPath === "/Ofertas";
 
-    const handlersigOut = () => {
-        signOut()
-         navigate({ to: '/Login' })
-    }
+  const handleSignOut = () => {
+    signOut();
+    navigate({ to: "/Login" });
+  };
 
   return (
-    <header className="page-header glassmorphism">
-          <nav>
-             <button className="unselected logout" type="button" onClick={handlersigOut}>Cerrar Sesion</button>
-                <button className={classnamePerfil ? "selected" : "unselected"} onClick={() => navigate({ to: '/Perfil' })}>
-                  Perfil
-                </button>
-
-                <button className={classnameOfertas ? "selected" : "unselected"} onClick={() => navigate({ to: '/Ofertas' })}>
-                  Ofertas
-                </button>
-          </nav>
+    <header className="main-header">
+      <nav className="main-nav">
+        <div className="nav-left">
+          <button
+            className={isPerfil ? "nav-btn active" : "nav-btn inactive"}
+            onClick={() => navigate({ to: "/Perfil" })}
+          >
+            <PiUser />
+            Perfil
+          </button>
+          <button
+            className={isOfertas ? "nav-btn active" : "nav-btn inactive"}
+            onClick={() => navigate({ to: "/Ofertas" })}
+          >
+            <TbReportSearch />
+            Ofertas
+          </button>
+        </div>
+        <button className="nav-btn logout" onClick={handleSignOut}>
+          <CgLogOut />
+          Cerrar sesión
+        </button>
+      </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

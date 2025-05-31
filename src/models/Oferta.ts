@@ -2,10 +2,12 @@ export interface Oferta {
     id: number, 
     puesto: string,
     descripcion: string,
-    empresaId: number
+    empresaId: number,
+    icono:string,
     empresaNombre:string
     habilidades: {
         id: number,
-        name: string
+        name: string,
+        icono: string
     }[];
 } 

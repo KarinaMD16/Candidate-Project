@@ -1,13 +1,22 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, redirect } from '@tanstack/react-router'
 import Header from '../../components/Header'
 import { useGetAplicaciones, useGetMatchingOfertas, useGetOfertas } from '../../hooks/ofertas/ofertasHooks'
 import OfferCard from '../../components/OfferCard';
 import { useState } from 'react';
 import { useGetProfile } from '../../hooks/perfil/ProfileHook';
+import { isAuthenticated } from '../../utils/auth';
 
 export const Route = createFileRoute('/(dashboard)/Ofertas')({
+    beforeLoad: () => {
+        if (!isAuthenticated()) {
+            throw redirect({
+                to: '/Login',
+            })
+        }
+    },
   component: RouteComponent,
 })
+
 
 function RouteComponent() {
   const [modo, setModo] = useState<'todas' | 'matching' | 'aplicaciones'>('matching');
@@ -46,11 +55,11 @@ function RouteComponent() {
   return <div>
     <Header />
     <div className='opciones'>
-      <button className='selected' onClick={ handleVerParaMi }>
+      <button className='btn active' onClick={ handleVerParaMi }>
         {modo === 'matching' ? "Ver todas" : "Ver para mi"}
       </button>
       
-      <button className='selected' onClick={ handleVerAplicaciones }>
+      <button className='btn active' onClick={ handleVerAplicaciones }>
         {modo === 'aplicaciones' ? "Viendo aplicaciones" : "Ver aplicaciones"}
         
       </button>
